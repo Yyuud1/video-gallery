@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Video filtered</title>
+	<style type="text/css">
+		@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,200&display=swap");
+		:root {
+		  --background: hsl(252, 30%, 17%);
+
+		  --color-blue: hsl(252, 75%, 60%);
+		  --color-black: #444;
+		  --color-white: #eff0f4;
+		}
+
+		* {
+		  margin: 0;
+		  padding: 0;
+		  outline: none;
+		  text-decoration: none;
+		  box-sizing: border-box;
+		  font-family: 'Poppins', sans-serif;
+		}
+
+		body {
+			background: var(--background);
+		}
+
+		.video-gallery {
+		  padding: 6rem 10% 1.4rem;
+		}
+
+		.video-gallery h2 {
+		  font-size: 2.2rem;
+		  font-weight: 700;
+		  color: var(--color-white);
+		}
+
+		.video-gallery h2 span {
+		  color: var(--color-blue);
+		}
+
+		.video-gallery .video-content {
+		  display: grid;
+		  grid-template-columns: repeat(2, 1fr);
+		  gap: 15px;
+		}
+
+		.video-gallery .video-content .main-video {
+		  background: var(--color-white);
+		  border-radius: 5px;
+		  padding: 10px;
+		}
+
+		.video-gallery .video-content .main-video .video {
+		  width: 100%;
+		  border-radius: 5px;
+		}
+
+		.video-gallery .video-content .main-video .video video {
+		  width: 100%;
+		  border-radius: 5px;
+		}
+
+		.video-gallery .video-content .main-video .title-video {
+		  color: var(--color-black);
+		  font-size: 22px;
+		  padding-top: 15px;
+		  padding-bottom: 15px;
+		}
+
+		.video-gallery .video-content .list-video {
+		  background: var(--color-white);
+		  border-radius: 5px;
+		  height: 300px;
+		  overflow-y: scroll;
+		}
+
+		.video-gallery .video-content .list-video .child-video {
+		  display: flex;
+		  align-items: center;
+		  gap: 15px;
+		  background-color: #f7f7f7;
+		  border-radius: 5px;
+		  margin: 10px;
+		  padding: 10px;
+		  border: 1px solid rgba(0, 0, 0, 0.1);
+		  cursor: pointer;
+		}
+
+		.video-gallery .video-content .list-video .child-video:hover {
+		  background: #ddd;
+		}
+
+		.video-gallery .video-content .list-video .child-video video {
+		  width: 100px;
+		  border-radius: 5px;
+		}
+
+		.video-gallery .video-content .list-video .child-video .title-video {
+		  color: var(--color-black);
+		  font-size: 17px;
+		}
+
+		.video-gallery .video-content .list-video .child-video.active {
+		  background: var(--color-blue);
+		}
+
+		.video-gallery .video-content .list-video .child-video.active .title-video {
+		  color: var(--color-white);
+		}
+	</style>
+</head>
+<body>
+	 <section class="video-gallery">
+        <h2>Video <span>gallery</span>.</h2>
+        <br />
+
+        <div class="video-content">
+          <div class="main-video">
+            <div class="video">
+              <video src="video/bandara.mp4" controls autoplay></video>
+              <h3 class="title-video">01. Chinesee Airport</h3>
+            </div>
+          </div>
+
+          <div class="list-video">
+            <div class="child-video active">
+              <video src="video/bandara.mp4"></video>
+              <p class="title-video">01. Chinesee Airport</p>
+            </div>
+            <div class="child-video">
+              <video src="video/bunga.mp4"></video>
+              <p class="title-video">02. Woman looking at flowers</p>
+            </div>
+            <div class="child-video">
+              <video src="video/kincir.mp4"></video>
+              <p class="title-video">03. Windmill view</p>
+            </div>
+            <div class="child-video">
+              <video src="video/cuak.mp4"></video>
+              <p class="title-video">04. Sekte cuaksss</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <script type="text/javascript">
+      	// Video Filtered
+		let mainVideo = document.querySelector(".main-video video");
+		let listVideo = document.querySelectorAll(".list-video .child-video");
+		let titleVideo = document.querySelector(".main-video .title-video");
+
+		listVideo.forEach((vid) => {
+		  vid.onclick = () => {
+		    listVideo.forEach((vid) => vid.classList.remove("active"));
+		    vid.classList.add("active");
+
+		    if (vid.classList.contains("active")) {
+		      let source = vid.children[0].getAttribute("src");
+		      mainVideo.src = source;
+		      let text = vid.children[1].innerHTML;
+		      titleVideo.innerHTML = text;
+		    }
+		  };
+		});
+      </script>
+</body>
+</html>
